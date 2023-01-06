@@ -1,6 +1,6 @@
 const usuarioModel = require("../Models/Usuario");
 
-const getAll = (req, res) => {
+const recuperarTodos = (req, res) => {
   usuarioModel.find({}, (err, result) => {
     res.status(200);
     res.send(result);
@@ -15,4 +15,4 @@ const registrarUsuario = (req, res) => {
   });
 };
 
-module.exports = { getAll, registrarUsuario };
+module.exports = { recuperarTodos, registrarUsuario };
