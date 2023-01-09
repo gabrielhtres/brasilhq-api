@@ -8,6 +8,13 @@ const recuperarTodos = (req, res) => {
   });
 };
 
+const recuperarPorId = (req, res) => {
+  livroModel.findById(req.params.id, (err, result) => {
+    res.status(200);
+    res.send(result);
+  });
+};
+
 const registrarLivro = (req, res) => {
   const { nome, descricao, autor, categorias, ano, paginas, editora, idioma } =
     req.body;
@@ -32,10 +39,29 @@ const atualizarLivro = async (req, res) => {
       if (err) {
         console.log(err);
       }
-      res.status(201);
+      res.status(200);
+      res.send(result.value);
+    }
+  );
+};
+
+const excluirLivro = (req, res) => {
+  livroModel.findByIdAndDelete(
+    mongoose.Types.ObjectId(req.params.id),
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.status(200);
       res.send(result);
     }
   );
 };
 
-module.exports = { recuperarTodos, registrarLivro, atualizarLivro };
+module.exports = {
+  recuperarTodos,
+  recuperarPorId,
+  registrarLivro,
+  atualizarLivro,
+  excluirLivro,
+};
